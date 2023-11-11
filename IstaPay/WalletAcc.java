@@ -1,6 +1,6 @@
 package IstaPay;
 
-public class WalletAcc extends Account{
+public class WalletAcc extends Account {
     private String walletProvider;
     WalletAcc(String provider){
         this.setAccountNum(getAccountNum()+1);
@@ -8,7 +8,7 @@ public class WalletAcc extends Account{
     }
     @Override
     public boolean verifyAccount(String phone) {
-        return false;
+        return true;
     }
 
     public String getWalletProvider() {

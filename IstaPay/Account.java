@@ -17,7 +17,7 @@ abstract public class Account {
         if (mat.find()) {
             System.out.println("Your OTP is: " + OTP);
             OTPverify = obj.nextLine();
-            if (OTP == OTPverify) {
+            if (OTP.equals(OTPverify)) {
                 return true;
             }else {
                 System.out.println("Unvalid OTP.PLease try again later");
