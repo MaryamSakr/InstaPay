@@ -4,7 +4,10 @@ import java.util.regex.Matcher;
 import java.util.Scanner;
 
 abstract public class Account {
-    protected String accountNum;
+    protected static String accountNum;
+    Account(){
+        this.accountNum=getAccountNum()+1;
+    }
 
     public boolean verifyMobileNum(String phone) {
         Pattern pat = Pattern.compile("^\\d{11}$");
