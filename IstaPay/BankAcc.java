@@ -1,4 +1,8 @@
 package IstaPay;
 
-public class BankAcc {
+public class BankAcc extends Account{
+    @Override
+    public boolean verifyAccount(String phone) {
+        return true;
+    }
 }
