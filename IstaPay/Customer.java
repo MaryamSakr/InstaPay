@@ -36,6 +36,8 @@ public class Customer {
             this.mobileNumber = mobileNumber;
             this.acc = account;
             this.balance = 1000;
+            id=customerMap.size()+1;
+            customerMap.put(id,this);
         }
     }
 
