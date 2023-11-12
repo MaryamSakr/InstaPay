@@ -2,6 +2,9 @@ package IstaPay;
 
 import javax.swing.plaf.IconUIResource;
 import java.util.Random;
+import java.util.HashMap;
+
+import java.util.Map;
 public class Customer {
     private String userName;
     private String passWord;
@@ -9,6 +12,8 @@ public class Customer {
     private double balance;
     private Account acc;
     private Transfer transfer;
+    public  Map<Integer, Customer> customerMap = new HashMap<>();
+    private int id=0;
 
     public void withdraw(double amount){
         balance-=amount;
