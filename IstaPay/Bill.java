@@ -1,6 +1,5 @@
 package IstaPay;
 
-public interface Bill
-{
-    public void calcAmount(float usage);
+public interface  Bill extends Transfer {
+    public float calcAmount(float usage);
 }
