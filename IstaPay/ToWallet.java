@@ -7,9 +7,9 @@ public class ToWallet implements Transfer{
     public void ExecuteTransfer(String moblieNumber, double amount,Customer user){
         //Customer receiver = new Customer;
 
-        for (Map.Entry<Integer,Customer>found:user.customerMap.entrySet() ){
-            if(moblieNumber.equals(found.getValue().getMobileNumber())){
-                Customer receiver =found.getValue();
+       for (Customer found:user.customers){
+            if(moblieNumber.equals(found.getMobileNumber())){
+                Customer receiver =found;
                 receiver.deposit(amount);
                 user.withdraw(amount);
 
