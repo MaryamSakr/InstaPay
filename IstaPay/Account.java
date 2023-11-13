@@ -10,7 +10,7 @@ abstract public class Account {
     }
 
     public boolean verifyMobileNum(String phone) {
-        Pattern pat = Pattern.compile("^\\d{11}$");
+        Pattern pat = Pattern.compile("^01[0-2,5]{1}[0-9]{8}$");
         Matcher mat = pat.matcher(phone);
         Scanner obj = new Scanner(System.in);
         String OTP = "171932", OTPverify;

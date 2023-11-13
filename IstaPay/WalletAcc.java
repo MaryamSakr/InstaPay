@@ -3,7 +3,6 @@ package IstaPay;
 public class WalletAcc extends Account {
     private String walletProvider;
     WalletAcc(String provider){
-        this.setAccountNum(getAccountNum()+1);
         this.walletProvider=provider;
     }
     @Override

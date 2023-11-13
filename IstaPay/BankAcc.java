@@ -1,19 +1,23 @@
 package IstaPay;
 
 public class BankAcc extends Account{
+    private String cridteNumber;
+    BankAcc(String cridteNumber){
+        this.cridteNumber=cridteNumber;
+    }
+    BankAcc(){
+
+    }
     @Override
     public boolean verifyAccount(String phone) {
         return true;
     }
-    private String BankAPI;
-    BankAcc(){
-        this.setAccountNum(getAccountNum()+1);
-    }
-    public String getBankAPI() {
-        return BankAPI;
+
+    public String getCridteNumber() {
+        return cridteNumber;
     }
 
-    public void setBankAPI(String bankAPI) {
-        BankAPI = bankAPI;
+    public void setCridteNumber(String cridteNumber) {
+        this.cridteNumber = cridteNumber;
     }
 }

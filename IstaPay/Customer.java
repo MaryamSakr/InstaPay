@@ -5,6 +5,8 @@ import java.util.Random;
 import java.util.HashMap;
 
 import java.util.Map;
+import java.util.Vector;
+
 public class Customer {
     private String userName;
     private String passWord;
@@ -14,7 +16,16 @@ public class Customer {
     private Transfer transfer;
     public  Map<Integer, Customer> customerMap = new HashMap<>();
     private int id=0;
+    Customer(String userName,String mobileNumber,String passWord,Account account){
+        this.userName=userName;
+        this.mobileNumber=mobileNumber;
+        this.passWord=passWord;
+        this.acc=account;
+        this.balance=1000;
+    }
+    Customer(){
 
+    }
     public void withdraw(double amount){
         balance-=amount;
         System.out.println(balance);
@@ -38,6 +49,8 @@ public class Customer {
             this.balance = 1000;
             id=customerMap.size()+1;
             customerMap.put(id,this);
+            Customer c=new Customer(userName,passWord,mobileNumber,account);
+            customers.add(c);
         }
     }
 
@@ -87,5 +100,20 @@ public class Customer {
 
     public void setTransfer(Transfer transfer) {
         this.transfer = transfer;
+    }
+    public static Vector<Customer> customers= new Vector<Customer>();
+    static {
+        Account acc=new BankAcc("1234569781253647");
+        Customer c=new Customer("alaa","01276012577","01276012577*Al",acc);
+        customers.add(c);
+        Account acc2=new BankAcc("25978516357894568");
+        Customer c2=new Customer("maryam","01122143218","Moka&2002",acc2);
+        customers.add(c2);
+        Account acc3=new WalletAcc("we");
+        Customer c3=new Customer("asmaa","01554884939","AsmaaSaleh/312",acc3);
+        customers.add(c3);
+        Account acc4=new BankAcc("etisalat");
+        Customer c4=new Customer("salma","01159228572","SalmaMorad$123",acc4);
+        customers.add(c4);
     }
 }
