@@ -106,7 +106,7 @@ public class Customer {
         Account acc=new BankAcc("1234569781253647");
         Customer c=new Customer("alaa","01276012577","01276012577*Al",acc);
         customers.add(c);
-        Account acc2=new BankAcc("25978516357894568");
+        Account acc2=new BankAcc("2597851635789456");
         Customer c2=new Customer("maryam","01122143218","Moka&2002",acc2);
         customers.add(c2);
         Account acc3=new WalletAcc("we");

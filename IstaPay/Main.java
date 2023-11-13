@@ -6,7 +6,6 @@ public class Main {
     public static void main(String[]args){
         boolean enter = false;
         Customer c1 = new Customer();
-        Account acc1;
         Scanner obj = new Scanner(System.in);
         System.out.println("Hello in our InstaPay application.\n do you want to:\n1-Register\n2-Sign in");
         int opt1 = obj.nextInt();
@@ -14,30 +13,46 @@ public class Main {
             System.out.println("Do You want to register as \n1-Bank Account User\n2-Wallet Account User");
             int opt2 = obj.nextInt();
             if(opt2 == 1){
-                acc1 = new BankAcc();
+                BankAcc acc1 = new BankAcc();
                 System.out.println("Enter Your mobile Number: ");
                 String mobil = obj.next();
                 if(acc1.verifyMobileNum(mobil)){
-                    System.out.println("Enter Your userName: ");
-                    String user = obj.next();
-                    System.out.println("Enter Strong PassWord: ");
-                    String pass = obj.next();
-                    c1.Register(mobil , user , pass , acc1);
-                    enter=true;
+                    System.out.println("Enter Your credit card number: ");
+                    String creditNum=obj.next();
+                    acc1.setCridteNumber(creditNum);
+                    if(acc1.verifyAccount(mobil)) {
+                        System.out.println("Enter Your userName: ");
+                        String user = obj.next();
+                        System.out.println("Enter Strong PassWord: ");
+                        String pass = obj.next();
+                        c1.Register(mobil, user, pass, acc1);
+                        enter = true;
+                    }
+                    else {
+                        System.out.println("Invalid credit card.");
+                    }
                 }
 
 
             }else if(opt2 == 2){
-                acc1 = new BankAcc();
+                WalletAcc acc2 = new WalletAcc();
                 System.out.println("Enter Your mobile Number: ");
                 String mobil = obj.next();
-                System.out.println(acc1.verifyMobileNum(mobil));
-                System.out.println("Enter Your userName: ");
-                String user = obj.next();
-                System.out.println("Enter Strong PassWord: ");
-                String pass = obj.next();
-                c1.Register(mobil , user , pass , acc1);
-                enter= true;
+                if(acc2.verifyMobileNum(mobil)) {
+                    System.out.println("Enter Your provider: ");
+                    String provider = obj.next();
+                    acc2.setWalletProvider(provider);
+                    if(acc2.verifyAccount(mobil)) {
+                        System.out.println("Enter Your userName: ");
+                        String user = obj.next();
+                        System.out.println("Enter Strong PassWord: ");
+                        String pass = obj.next();
+                        c1.Register(mobil, user, pass, acc2);
+                        enter = true;
+                    }else {
+                        System.out.println("There is no wallet in this number.");
+                    }
+                }
 
             }else {
                 System.out.println("you enter a wrong option.");
