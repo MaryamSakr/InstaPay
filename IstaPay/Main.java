@@ -32,39 +32,51 @@ public class Main {
                                 System.out.println("Enter Strong PassWord (should include at least one uppercase one lowercase and one special character and the password should be over than 8 character): ");
                                 pass = obj.next();
                             }
-
-                            if(c1.Register(mobil, user, pass, acc1)){
+                            if(c1.Register(user, pass, mobil,acc1)){
                                 enter = true;
                                 break;
                             }
                         }
                         else {
-                            System.out.println("Invalid credit card.");
+                            System.out.println("Bank Account not exist");
                         }
                     }
 
 
                 }else if(opt2 == 2){
-                    WalletAcc acc2 = new WalletAcc("etisalat");
+                    WalletAcc acc2 = new WalletAcc();
                     System.out.println("Enter Your mobile Number: ");
                     String mobil = obj.next();
-                    if(acc2.verifyAccount(mobil)) {
-                        System.out.println("Enter Your userName: ");
-                        String user = obj.next();
-                        System.out.println("Enter Strong PassWord (should include at least one uppercase one lowercase and one special character and the password should be over than 8 character): ");
-                        String reg = "^(?=.*\\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[a-zA-Z])(?=.*[@#$%&*]).{8,}$";
-                        String pass = obj.next();
-                        while (!Pattern.matches(reg,pass)){
-                            System.out.println("Enter Strong PassWord (should include at least one uppercase one lowercase and one special character and the password should be over than 8 character): ");
-                            pass = obj.next();
+                    if(acc2.verifyMobileNum(mobil)) {
+                        if(mobil.charAt(2)=='0'){
+                            acc2.setWalletProvider("vodafone");
+                        }else if(mobil.charAt(2)=='1'){
+                            acc2.setWalletProvider("etisalat");
+                        }else if(mobil.charAt(2)=='2'){
+                            acc2.setWalletProvider("orange");
+                        }else if(mobil.charAt(2)=='5'){
+                            acc2.setWalletProvider("we");
                         }
-
-                        if(c1.Register(mobil, user, pass, acc2)){
-                            enter = true;
-                            break;
+                        System.out.println(acc2.getWalletProvider());
+                        if (acc2.verifyAccount(mobil)) {
+                            System.out.println("Enter Your userName: ");
+                            String user = obj.next();
+                            System.out.println("Enter Strong PassWord (should include at least one uppercase one lowercase and one special character and the password should be over than 8 character): ");
+                            String reg = "^(?=.*\\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[a-zA-Z])(?=.*[@#$%&*]).{8,}$";
+                            String pass = obj.next();
+                            while (!Pattern.matches(reg, pass)) {
+                                System.out.println("Enter Strong PassWord (should include at least one uppercase one lowercase and one special character and the password should be over than 8 character): ");
+                                pass = obj.next();
+                            }
+                            if (c1.Register(user, pass, mobil,acc2)) {
+                                enter = true;
+                                break;
+                            }
+                        }
+                        else {
+                            System.out.println("Wallet not exist");
                         }
                     }
-
                 }else {
                     System.out.println("you enter a wrong option.");
                 }
