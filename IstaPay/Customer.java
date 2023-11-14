@@ -1,7 +1,6 @@
 package IstaPay;
 
 import javax.swing.plaf.IconUIResource;
-import java.util.Random;
 import java.util.HashMap;
 
 import java.util.Map;
@@ -11,37 +10,45 @@ public class Customer {
     private String userName;
     private String passWord;
     private String mobileNumber;
-    private double balance;
+    private double balance = 1000;
     private Account acc;
     private Transfer transfer;
     public  Map<Integer, Customer> customerMap = new HashMap<>();
-    private int id=0;
+    private int id = 0;
     Customer(String userName,String mobileNumber,String passWord,Account account){
         this.userName=userName;
         this.mobileNumber=mobileNumber;
         this.passWord=passWord;
         this.acc=account;
-        this.balance=1000;
     }
     Customer(){
 
     }
     public void withdraw(double amount){
-        balance-=amount;
-        System.out.println(balance);
+        if (amount> balance){
+            System.out.println("the amount exceed your balance.");
+        }else {
+            balance-=amount;
+            System.out.println("Your balance is "+balance);
+        }
     }
     public void deposit(double amount){
         balance+=amount;
-        System.out.println(balance);
+        System.out.println("Your balance is " + balance);
     }
     public void TransferExecution(Transfer t){
         transfer = t;
     }
 
-    public void Register(String userName , String passWord , String mobileNumber , Account account){
-        Random random = new Random();
+    public boolean Register(String userName , String passWord , String mobileNumber , Account account){
         if(account.verifyAccount(mobileNumber)){
-            System.out.println("..");
+            for (int i = 0; i < customers.size(); i++) {
+                Customer acc = customers.get(i);
+                if (acc.userName.equals(userName) ){
+                    System.out.println("userName Is already Exist");
+                    return false;
+                }
+            }
             this.userName = userName;
             this.passWord = passWord;
             this.mobileNumber = mobileNumber;
@@ -51,7 +58,20 @@ public class Customer {
             customerMap.put(id,this);
             Customer c=new Customer(userName,passWord,mobileNumber,account);
             customers.add(c);
+            return true;
+        }else{
+            System.out.println("Bank Account Is Not Exist");
+            return false;
         }
+    }
+    public boolean signIn(String user , String pass){
+        for (int i = 0; i < customers.size(); i++) {
+            Customer account = customers.get(i);
+            if (account.userName.equals(user) && account.passWord.equals(pass)){
+                return true;
+            }
+        }
+        return false;
     }
 
     public String getUserName() {
@@ -116,4 +136,5 @@ public class Customer {
         Customer c4=new Customer("salma","01159228572","SalmaMorad$123",acc4);
         customers.add(c4);
     }
+
 }

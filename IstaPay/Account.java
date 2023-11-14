@@ -20,13 +20,13 @@ abstract public class Account {
             if (OTP.equals(OTPverify)) {
                 return true;
             }else {
-                System.out.println("Unvalid OTP.PLease try again later");
+                System.out.println("invalid OTP.PLease try again later");
                 return false;
             }
         }
         return false;
     }
-    abstract public boolean verifyAccount(String phone);
+    abstract public boolean  verifyAccount(String phone);
 
     public void setAccountNum(String accountNum) {
         this.accountNum = accountNum;
