@@ -41,7 +41,6 @@ public class Customer {
     }
 
     public boolean Register(String userName , String passWord , String mobileNumber , Account account){
-        if(account.verifyAccount(mobileNumber)){
             for (int i = 0; i < customers.size(); i++) {
                 Customer acc = customers.get(i);
                 if (acc.userName.equals(userName) ){
@@ -59,10 +58,7 @@ public class Customer {
             Customer c=new Customer(userName,passWord,mobileNumber,account);
             customers.add(c);
             return true;
-        }else{
-            System.out.println("Bank Account Is Not Exist");
-            return false;
-        }
+
     }
     public boolean signIn(String user , String pass){
         for (int i = 0; i < customers.size(); i++) {
