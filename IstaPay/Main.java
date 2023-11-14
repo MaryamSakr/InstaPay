@@ -97,7 +97,38 @@ public class Main {
                     c1.deposit(amount);
                 }else if(opt3 ==4) {
                     System.out.println("Your Balance is: " + c1.getBalance());
+                }else if(opt3==3) {
+
+                    System.out.println("Do you want to transfer to:\n1-Bank Account\n2-InstaPay Account\n3-Wallet\n");
+                    int tr=obj.nextInt();
+                    if(tr==1){
+                        System.out.println("Enter the user name: ");
+                        String ather= obj.next();
+                        System.out.println("Enter the amount: ");
+                        int amount= obj.nextInt();
+
+                        ToBankAcc t=new ToBankAcc() ;
+                        t.ExecuteTransfer(ather,amount,c1);
+                    }else if(tr ==2){
+                        System.out.println("Enter the user name: ");
+                        String ather= obj.next();
+                        System.out.println("Enter the amount: ");
+                        int amount= obj.nextInt();
+
+                        ToInsatAcc t=new ToInsatAcc() ;
+                        t.ExecuteTransfer(ather,amount,c1);
+                    }else if(tr ==3){
+                        System.out.println("Enter the mobile Number: ");
+                        String ather= obj.next();
+                        System.out.println("Enter the amount: ");
+                        int amount= obj.nextInt();
+
+                        ToWallet t=new ToWallet() ;
+                        t.ExecuteTransfer(ather,amount,c1);
+                    }
+
                 }
+                
                 System.out.println("Do you want To:\n1-Withdraw\n2-Deposit\n3-Transfer\n4-Inquire Your Balance\n5-Exit");
                 opt3 = obj.nextInt();
             }
