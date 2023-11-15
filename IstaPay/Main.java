@@ -96,9 +96,9 @@ public class Main {
             opt1 = obj.nextInt();
         }
         if(enter){
-            System.out.println("Hello In our system\nDo you want To:\n1-Withdraw\n2-Deposit\n3-Transfer\n4-Inquire Your Balance\n5-Exit");
+            System.out.println("Hello In our system\nDo you want To:\n1-Withdraw\n2-Deposit\n3-Transfer\n4-Inquire Your Balance\n5-pay your bill\n6-Exit");
             int opt3 = obj.nextInt();
-            while (opt3!=5){
+            while (opt3!=6){
                 if(opt3 == 1){
                     System.out.println("enter the amount that you want to Withdraw: ");
                     double amount = obj.nextDouble();
@@ -109,6 +109,7 @@ public class Main {
                     c1.deposit(amount);
                 }else if(opt3 ==4) {
                     System.out.println("Your Balance is: " + c1.getBalance());
+
                 }else if(opt3==3) {
 
                     System.out.println("Do you want to transfer to:\n1-Bank Account\n2-InstaPay Account\n3-Wallet\n");
@@ -121,6 +122,7 @@ public class Main {
 
                         ToBankAcc t=new ToBankAcc() ;
                         t.ExecuteTransfer(ather,amount,c1);
+
                     }else if(tr ==2){
                         System.out.println("Enter the user name: ");
                         String ather= obj.next();
@@ -140,8 +142,45 @@ public class Main {
                     }
 
                 }
+                else if(opt3==5) {
+
+                    System.out.println("Do you want to transfer to:\n1-pay gas\n2-pay water\n3-pay electricity\n");
+                    int tri = obj.nextInt();
+                    if (tri == 1) {
+                        System.out.println("Enter the company name: ");
+                        String company = obj.next();
+                        System.out.println("Enter the consumption amount: ");
+                        int consumption = obj.nextInt();
+                        Gas t1 = new Gas();
+                        t1.ExecuteTransfer(company, consumption, c1);
+                        System.out.println();
+
+                    }
+                    else if (tri==2)
+                    {
+                        System.out.println("Enter the company name: ");
+                        String company = obj.next();
+                        System.out.println("Enter the consumption amount: ");
+                        int consumption = obj.nextInt();
+                        Water t1 = new Water();
+                        t1.ExecuteTransfer(company, consumption, c1);
+                        System.out.println();
+                    }
+                    else if (tri==3)
+                    {
+                        System.out.println("Enter the company name: ");
+                        String company = obj.next();
+                        System.out.println("Enter the consumption amount: ");
+                        int consumption = obj.nextInt();
+                        Electricity t1 = new Electricity();
+                        t1.ExecuteTransfer(company, consumption, c1);
+                        System.out.println();
+                    }
+                }
+
+
                 
-                System.out.println("Do you want To:\n1-Withdraw\n2-Deposit\n3-Transfer\n4-Inquire Your Balance\n5-Exit");
+                System.out.println("Do you want To:\n1-Withdraw\n2-Deposit\n3-Transfer\n4-Inquire Your Balance\n5-pay your bill\n6-Exit");
                 opt3 = obj.nextInt();
             }
             System.out.println("See You Again.");
