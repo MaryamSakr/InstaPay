@@ -1,8 +1,12 @@
 package IstaPay;
-import java.util.BitSet;
 import java.util.Scanner;
 import java.util.regex.Pattern;
 
+//when sign in function you must use the accounts that exists on customers vector at customer class.
+//when register as bank account user you must use the phone number and credit card number those exist on the API Map
+// that exists on BankAcc.
+//when register as Wallet account user you must use the phone number and Provider company name those exist on the Providers Map
+// that exists on WalletAcc.
 public class Main {
     public static void main(String[]args){
         boolean enter = false;
@@ -111,81 +115,100 @@ public class Main {
                     System.out.println("Your Balance is: " + c1.getBalance());
 
                 }else if(opt3==3) {
-
-                    System.out.println("Do you want to transfer to:\n1-Bank Account\n2-InstaPay Account\n3-Wallet\n");
-                    int tr=obj.nextInt();
-                    if(tr==1){
-                        System.out.println("Enter the user name: ");
-                        String ather= obj.next();
-                        System.out.println("Enter the amount: ");
-                        int amount= obj.nextInt();
-
-                        ToBankAcc t=new ToBankAcc() ;
-                        t.ExecuteTransfer(ather,amount,c1);
-
-                    }else if(tr ==2){
-                        System.out.println("Enter the user name: ");
-                        String ather= obj.next();
-                        System.out.println("Enter the amount: ");
-                        int amount= obj.nextInt();
-
-                        ToInsatAcc t=new ToInsatAcc() ;
-                        t.ExecuteTransfer(ather,amount,c1);
-                    }else if(tr ==3){
-                        System.out.println("Enter the mobile Number: ");
-                        String ather= obj.next();
-                        System.out.println("Enter the amount: ");
-                        int amount= obj.nextInt();
-
-                        ToWallet t=new ToWallet() ;
-                        t.ExecuteTransfer(ather,amount,c1);
+                    System.out.println("Do you want to transfer to:\n1-Bank Account\n2-InstaPay Account\n3-Wallet\n4-Exit");
+                    int trans=obj.nextInt();
+                    Transfer t;
+                    double amount;
+                    switch (trans){
+                        case 1:
+                            System.out.println("Enter the credit card you want transfer to: ");
+                            String creditnum=obj.next();
+                            System.out.println("Enter the amount you to transfer: ");
+                            amount=obj.nextDouble();
+                            t=new ToBankAcc();
+                            c1.TransferExecution(t,amount,creditnum);
+                            System.out.println("Your balance is "+c1.getBalance());
+                            break;
+                        case 2:
+                            System.out.println("Enter the user name you want transfer to: ");
+                            String username=obj.next();
+                            System.out.println("Enter the amount you to transfer: ");
+                            amount=obj.nextDouble();
+                            t=new ToInsatAcc();
+                            c1.TransferExecution(t,amount,username);
+                            System.out.println("Your balance is "+c1.getBalance());
+                            break;
+                        case 3:
+                            System.out.println("Enter the mobile number you want transfer to: ");
+                            String phone=obj.next();
+                            System.out.println("Enter the amount you to transfer: ");
+                            amount=obj.nextDouble();
+                            t=new ToWallet();
+                            c1.TransferExecution(t,amount,phone);
+                            System.out.println("Your balance is "+c1.getBalance());
+                            break;
+                        case 4:
+                            System.out.println("See You Again.");
+                            System.exit(0);
+                        default:
+                            System.out.println("Wrong input");
+                            break;
                     }
-
                 }
                 else if(opt3==5) {
-
-                    System.out.println("Do you want to transfer to:\n1-pay gas\n2-pay water\n3-pay electricity\n");
-                    int tri = obj.nextInt();
-                    if (tri == 1) {
-                        System.out.println("Enter the company name: ");
-                        String company = obj.next();
-                        System.out.println("Enter the consumption amount: ");
-                        int consumption = obj.nextInt();
-                        Gas t1 = new Gas();
-                        t1.ExecuteTransfer(company, consumption, c1);
-                        System.out.println();
-
-                    }
-                    else if (tri==2)
-                    {
-                        System.out.println("Enter the company name: ");
-                        String company = obj.next();
-                        System.out.println("Enter the consumption amount: ");
-                        int consumption = obj.nextInt();
-                        Water t1 = new Water();
-                        t1.ExecuteTransfer(company, consumption, c1);
-                        System.out.println();
-                    }
-                    else if (tri==3)
-                    {
-                        System.out.println("Enter the company name: ");
-                        String company = obj.next();
-                        System.out.println("Enter the consumption amount: ");
-                        int consumption = obj.nextInt();
-                        Electricity t1 = new Electricity();
-                        t1.ExecuteTransfer(company, consumption, c1);
-                        System.out.println();
+                    System.out.println("Do you want to transfer to:\n1-pay gas\n2-pay water\n3-pay electricity\n4-Exit");
+                    int trans=obj.nextInt();
+                    Transfer t;
+                    String userName;
+                    double amount=0;
+                    switch (trans){
+                        case 1:
+                            userName="gas";
+                            t=new Gas();
+                            if(t instanceof Gas) {
+                                amount = ((Gas) t).calcAmount();
+                            }
+                            c1.TransferExecution(t,amount,userName);
+                            System.out.println("Your balance is "+c1.getBalance());
+                            break;
+                        case 2:
+                            userName="water";
+                            t=new Water();
+                            if(t instanceof Water) {
+                                amount = ((Water) t).calcAmount();
+                            }
+                            c1.TransferExecution(t,amount,userName);
+                            System.out.println("Your balance is "+c1.getBalance());
+                            break;
+                        case 3:
+                            userName="electricity";
+                            t=new Electricity();
+                            if(t instanceof Electricity) {
+                                amount = ((Electricity) t).calcAmount();
+                            }
+                            c1.TransferExecution(t,amount,userName);
+                            System.out.println("Your balance is "+c1.getBalance());
+                            break;
+                        case 4:
+                            System.out.println("See You Again.");
+                            System.exit(0);
+                        default:
+                            System.out.println("Wrong input");
+                            break;
                     }
                 }
-
-
-                
                 System.out.println("Do you want To:\n1-Withdraw\n2-Deposit\n3-Transfer\n4-Inquire Your Balance\n5-pay your bill\n6-Exit");
                 opt3 = obj.nextInt();
             }
             System.out.println("See You Again.");
+            System.exit(0);
         }else{
             System.out.println("See You Again.");
+            System.exit(0);
         }
     }
+
+
+
 }
+

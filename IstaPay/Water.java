@@ -1,29 +1,26 @@
 package IstaPay;
 
 public class Water implements Bill ,Transfer {
-
-    String WaterCompany;
-    float WaterConsumption;
-    public void ExecuteTransfer(String companyName , double consumption , Customer user)
-    {
-        double toPay = calcAmount(consumption);
-
-        for (Customer found:user.customers){
+    float WaterConsumption=1000;
+    public boolean ExecuteTransfer(String companyName , double toPay) {
+        for (int i = 0; i < Customer.customers.size(); i++){
+            Customer found = Customer.customers.get(i);
             if(companyName.equals(found.getUserName())){
                 Customer receiverCompany =found;
                 receiverCompany.deposit(toPay);
-                user.withdraw(toPay);
+                return true;
             }
         }
+        return false;
 
     }
-    public double calcAmount(double WaterConsumption)
-    {
+    public double calcAmount() {
         double payment;
-        payment =WaterConsumption * (0.1);
+        payment =this.WaterConsumption * (0.1);
         System.out.println("you paied " + payment +" L.E to the water company" );
-
         return payment;
-
+    }
+    public void setWaterConsumption(float waterConsumption) {
+        WaterConsumption = waterConsumption;
     }
 }

@@ -1,8 +1,5 @@
 package IstaPay;
-
-import javax.swing.plaf.IconUIResource;
 import java.util.HashMap;
-
 import java.util.Map;
 import java.util.Vector;
 
@@ -13,8 +10,6 @@ public class Customer {
     private double balance = 1000;
     private Account acc;
     private Transfer transfer;
-    public  Map<Integer, Customer> customerMap = new HashMap<>();
-    private int id = 0;
     Customer(String userName,String mobileNumber,String passWord,Account account){
         this.userName=userName;
         this.mobileNumber=mobileNumber;
@@ -29,15 +24,21 @@ public class Customer {
             System.out.println("the amount exceed your balance.");
         }else {
             balance-=amount;
-            System.out.println("Your balance is "+balance);
         }
     }
     public void deposit(double amount){
         balance+=amount;
-        System.out.println("Your balance is " + balance);
     }
-    public void TransferExecution(Transfer t){
+    public void TransferExecution(Transfer t,double amount,String acc){
         transfer = t;
+        if (amount<=balance){
+            if(t.ExecuteTransfer(acc,amount)){
+                this.withdraw(amount);
+
+            }
+        }else{
+            System.out.println("The amount is exceed the balance.");
+        }
     }
 
     public boolean Register(String userName , String passWord , String mobileNumber , Account account){
@@ -53,8 +54,6 @@ public class Customer {
             this.mobileNumber = mobileNumber;
             this.acc = account;
             this.balance = 1000;
-            id=customerMap.size()+1;
-            customerMap.put(id,this);
             Customer c=new Customer(userName,passWord,mobileNumber,account);
             customers.add(c);
             return true;
@@ -119,31 +118,31 @@ public class Customer {
     }
     public static Vector<Customer> customers= new Vector<Customer>();
     static {
-        Account acc=new BankAcc("1234569781253647");
+        BankAcc acc=new BankAcc("1234569781253647");
         Customer c=new Customer("alaa","01276012577","01276012577*Al",acc);
         customers.add(c);
-        Account acc2=new BankAcc("2597851635789456");
+        BankAcc acc2=new BankAcc("2597851635789456");
         Customer c2=new Customer("maryam","01122143218","Moka&2002",acc2);
         customers.add(c2);
-        Account acc3=new WalletAcc("we");
+        WalletAcc acc3=new WalletAcc("we");
         Customer c3=new Customer("asmaa","01554884939","AsmaaSaleh/312",acc3);
         customers.add(c3);
-        Account acc4=new BankAcc("etisalat");
+        WalletAcc acc4=new WalletAcc("etisalat");
         Customer c4=new Customer("salma","01159228572","SalmaMorad$123",acc4);
         customers.add(c4);
 
         //adding companies accounts :
 
-        Account acc5=new BankAcc("1000");
-        Customer c5=new Customer("gas","01100000000","gass1010",acc);
+        BankAcc acc5=new BankAcc();
+        Customer c5=new Customer("gas","01100000000","Gas*1010",acc5);
         customers.add(c5);
 
-        Account acc6=new BankAcc("1001");
-        Customer c6=new Customer("water","01100000001","water1010",acc);
+        BankAcc acc6=new BankAcc();
+        Customer c6=new Customer("water","01100000001","Water*1010",acc6);
         customers.add(c6);
 
-        Account acc7=new BankAcc("1002");
-        Customer c7=new Customer("electricity","01100000002","electricity1010",acc3);
+        BankAcc acc7=new BankAcc();
+        Customer c7=new Customer("electricity","01100000002","Electricity*1010",acc7);
         customers.add(c7);
 
 

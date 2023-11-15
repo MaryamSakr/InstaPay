@@ -1,22 +1,23 @@
 package IstaPay;
 import java.util.Map;
 public class ToBankAcc implements Transfer{
-   // private Customer user;
     @Override
-    public void ExecuteTransfer(String username, double amount,Customer user){
-
-        if(user.getAcc() instanceof BankAcc) {
-            for (Customer found : user.customers) {
-                if (username.equals(found.getUserName())) {
-                    Customer receiver = found;
-                    receiver.deposit(amount);
-                    user.withdraw(amount);
-
-
+    public boolean ExecuteTransfer(String creditNum, double amount){
+        for (int i = 0; i < Customer.customers.size(); i++){
+            if(Customer.customers.get(i).getAcc() instanceof BankAcc){
+                if(creditNum.equals(((BankAcc) Customer.customers.get(i).getAcc()).getCridteNumber())){
+                    Customer.customers.get(i).deposit(amount);
+                    return true;
                 }
             }
-        }else {
-            System.out.println("you must transfer from BANK ACCOUNT \n");
         }
+        for (Map.Entry<String,String>found:BankAcc.Api.entrySet() ){
+            if(creditNum.equals(found.getValue())){
+                System.out.println("The process is done");
+                return true;
+            }
+        }
+        System.out.println("This credit card number doesn't have an account");
+        return false;
     }
 }

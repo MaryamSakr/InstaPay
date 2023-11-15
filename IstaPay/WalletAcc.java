@@ -26,7 +26,7 @@ public class WalletAcc extends Account {
     public void setWalletProvider(String walletProvider) {
         this.walletProvider = walletProvider;
     }
-    private static Map<String,String> Providers=new HashMap<>();
+    public static Map<String,String> Providers=new HashMap<>();
     static {
         Providers.put("01276012577","orange");
         Providers.put("01554884939","we");

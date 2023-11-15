@@ -3,8 +3,6 @@ package IstaPay;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Scanner;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
 
 public class BankAcc extends Account{
     private String creditNumber;
@@ -41,7 +39,7 @@ public class BankAcc extends Account{
             }
         }
     }
-    private static Map<String,String> Api=new HashMap<>();
+    public static Map<String,String> Api=new HashMap<>();
     static {
         Api.put("01276012577","1234569781253647");
         Api.put("01122143218","2597851635789456");

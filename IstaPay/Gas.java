@@ -1,27 +1,26 @@
 package IstaPay;
-//import java.lang.String;
 
 public class Gas implements Bill ,Transfer {
-    String gasSupplier;
-    float gasConsumption;
-    public void ExecuteTransfer(String companyName , double consumption , Customer user)
-    {
-        double toPay = calcAmount(consumption);
-
-        for (Customer found:user.customers){
+    float gasConsumption=500;
+    public boolean ExecuteTransfer(String companyName , double toPay) {
+        for (int i = 0; i < Customer.customers.size(); i++){
+            Customer found = Customer.customers.get(i);
             if(companyName.equals(found.getUserName())){
                 Customer receiverCompany =found;
                 receiverCompany.deposit(toPay);
-                user.withdraw(toPay);
+                return true;
             }
-        }
-    }
-    public double calcAmount(double gasConsumption)
-    {
-        double payment;
-        payment =gasConsumption * (0.3);
-        System.out.println("you paied " + payment +" L.E to the gas company" );
 
+        }
+        return false;
+    }
+    public double calcAmount() {
+        double payment;
+        payment =this.gasConsumption * (0.3);
+        System.out.println("you paied " + payment +" L.E to the gas company" );
         return payment;
+    }
+    public void setGasConsumption(float gasConsumption) {
+        this.gasConsumption = gasConsumption;
     }
 }
