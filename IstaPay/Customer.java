@@ -131,6 +131,23 @@ public class Customer {
         Account acc4=new BankAcc("etisalat");
         Customer c4=new Customer("salma","01159228572","SalmaMorad$123",acc4);
         customers.add(c4);
+
+        //adding companies accounts :
+
+        Account acc5=new BankAcc("1000");
+        Customer c5=new Customer("gas","01100000000","gass1010",acc);
+        customers.add(c5);
+
+        Account acc6=new BankAcc("1001");
+        Customer c6=new Customer("water","01100000001","water1010",acc);
+        customers.add(c6);
+
+        Account acc7=new BankAcc("1002");
+        Customer c7=new Customer("electricity","01100000002","electricity1010",acc3);
+        customers.add(c7);
+
+
     }
+
 
 }
