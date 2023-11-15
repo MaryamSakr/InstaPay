@@ -7,7 +7,6 @@ public class Gas implements Bill ,Transfer {
     public void ExecuteTransfer(String companyName , double consumption , Customer user)
     {
         double toPay = calcAmount(consumption);
-        System.out.println(toPay );
 
         for (Customer found:user.customers){
             if(companyName.equals(found.getUserName())){
@@ -20,8 +19,8 @@ public class Gas implements Bill ,Transfer {
     public double calcAmount(double gasConsumption)
     {
         double payment;
-        payment =gasConsumption * (0.5);
-        System.out.println("you paied " + payment +" L.E" );
+        payment =gasConsumption * (0.3);
+        System.out.println("you paied " + payment +" L.E to the gas company" );
 
         return payment;
     }
